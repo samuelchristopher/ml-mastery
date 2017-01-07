@@ -1,4 +1,5 @@
 from pandas import read_csv
+from sklearn.model_selection import train_test_split
 from pandas.tools.plotting import scatter_matrix
 import matplotlib.pyplot as plt
 
@@ -17,9 +18,15 @@ data = read_csv(url, names=names)
 
 # Part three: Visualize the data
 # a. Univariate plots
-data.plot(kind='box', subplots=True, layout=(3,3), sharex=False, sharey=False)
+# data.plot(kind='box', subplots=True, layout=(3,3), sharex=False, sharey=False)
+# # b. Multivariate plots
+# scatter_matrix(data)
+# plt.show()
 
-
-# b. Multivariate plots
-scatter_matrix(data)
-plt.show()
+# Part four: Train, test split
+array = data.values
+X = array[:, 0:8]
+y = array[:, 8]
+seed = 7
+test_size = 0.2
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=seed)
