@@ -6,6 +6,9 @@ names = ['times_pregnant', 'glucose_conc', 'blood_pressure', 'fold_thickness', '
 data = read_csv(url, names=names)
 
 # Part two: Analyze the data
+print(data.shape)
 print(data.head(20))
 print(data.describe())
 print(data.corr())
+# Class distrubution
+print(data.groupby('class').size())
