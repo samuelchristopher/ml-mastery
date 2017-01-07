@@ -13,6 +13,8 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
+# Metrics
+from sklearn.metrics import accuracy_score
 
 
 # Part one: Load the data
@@ -64,3 +66,11 @@ for name, model in models:
     names.append(name)
     message = '%s: %f (%f)' % (name, result.mean(), result.std())
     print(message)
+
+# Part seven: Training the best
+# Logistic regression chosen
+clf = LogisticRegression()
+clf.fit(X_train, y_train)
+pred = clf.predict(X_test)
+accuracy = accuracy_score(y_test, pred)
+print(accuracy)
