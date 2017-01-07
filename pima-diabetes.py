@@ -46,31 +46,39 @@ test_size = 0.2
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_size, random_state=seed)
 
 # Part five: Testing the models
-models = []
-models.append(('LR', LogisticRegression()))
-models.append(('LDA', LinearDiscriminantAnalysis()))
-models.append(('KNN', KNeighborsClassifier()))
-models.append(('GNB', GaussianNB()))
-models.append(('DT', DecisionTreeClassifier()))
-models.append(('SVM', SVC()))
+# models = []
+# models.append(('LR', LogisticRegression()))
+# models.append(('LDA', LinearDiscriminantAnalysis()))
+# models.append(('KNN', KNeighborsClassifier()))
+# models.append(('GNB', GaussianNB()))
+# models.append(('DT', DecisionTreeClassifier()))
+# models.append(('SVM', SVC()))
+#
+# # Part six: Choosing the models
+# results = []
+# names = []
+# seed = 7
+# scoring = 'accuracy'
+# for name, model in models:
+#     kfold = KFold(n_splits=10, random_state=seed)
+#     result = cross_val_score(model, X_train, y_train, cv=kfold, scoring=scoring)
+#     results.append(result)
+#     names.append(name)
+#     message = '%s: %f (%f)' % (name, result.mean(), result.std())
+#     print(message)
+#
+# # Part seven: Training the best
+# # Logistic regression chosen
+# clf = LogisticRegression()
+# clf.fit(X_train, y_train)
+# pred = clf.predict(X_test)
+# accuracy = accuracy_score(y_test, pred)
+# print(accuracy)
 
-# Part six: Choosing the models
-results = []
-names = []
-seed = 7
-scoring = 'accuracy'
-for name, model in models:
-    kfold = KFold(n_splits=10, random_state=seed)
-    result = cross_val_score(model, X_train, y_train, cv=kfold, scoring=scoring)
-    results.append(result)
-    names.append(name)
-    message = '%s: %f (%f)' % (name, result.mean(), result.std())
-    print(message)
+# Part eight: Scatter plots
+pos = data.groupby('class').get_group(1)
+neg = data.groupby('class').get_group(0)
 
-# Part seven: Training the best
-# Logistic regression chosen
-clf = LogisticRegression()
-clf.fit(X_train, y_train)
-pred = clf.predict(X_test)
-accuracy = accuracy_score(y_test, pred)
-print(accuracy)
+ax = pos.plot(kind='scatter', x='times_pregnant', y='age',color='DarkBlue', label='Positive')
+neg.plot(kind='scatter', x='times_pregnant', y='age',color='Green', label='Negative', ax=ax)
+plt.show()
